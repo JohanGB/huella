@@ -2,7 +2,7 @@
 
 [Español](README.md) · **English** · [Portfolio page](https://johangb.github.io/en/projects/huella.html)
 
-![tests](https://github.com/JohanGB/huella/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![License](https://img.shields.io/badge/license-MIT-green)
 
 A passive, read-only profiler for Windows and Linux. It sits hidden in the system tray,
 records resource use per application and detects memory leaks and processes with
@@ -129,4 +129,4 @@ pytest
 ```
 
 117 tests on Python 3.10 and 3.13, including the test with real processes. They have not
-been run on Windows.
+been run on Windows. In GitHub CI (Ubuntu, Python 3.11) 116 of 117 pass: `tests/test_daemon.py::test_callback_receives_alerts` fails there and is pending review.
