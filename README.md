@@ -2,7 +2,7 @@
 
 **Español** · [English](README.en.md) · [Ficha en el portafolio](https://johangb.github.io/proyectos/huella.html)
 
-![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
+![pruebas](https://github.com/JohanGB/huella/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
 
 Profiler pasivo de solo lectura para Windows y Linux. Vive oculto en la bandeja del
 sistema, registra el consumo por aplicación y detecta fugas de memoria y procesos con CPU
@@ -217,4 +217,4 @@ pytest
 ```
 
 117 pruebas en Python 3.10 y 3.13, con SQLite 3.53, incluida la prueba con procesos reales.
-En Windows no se han ejecutado. En la CI de GitHub (Ubuntu, Python 3.11) pasan 116 de 117: `tests/test_daemon.py::test_callback_receives_alerts` falla allí y está pendiente de revisar.
+En Windows no se han ejecutado. En la CI de GitHub (Ubuntu, Python 3.11) pasan las 117, pero `tests/test_daemon.py::test_callback_receives_alerts` es intermitente: falló en la primera ejecución y pasó en la siguiente. Depende de tiempos reales y está pendiente de revisar.
