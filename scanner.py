@@ -1,7 +1,7 @@
 """Explorador plano de archivos pesados. Solo lee metadatos, nunca abre un archivo.
 
 Corre bajo demanda en un hilo que muere al terminar. No hay escaneo automático:
-recorrer el disco en segundo plano sería justo el tipo de carga que Huella vigila.
+recorrer el disco en segundo plano sería justo el tipo de carga que Quietwatch vigila.
 """
 from __future__ import annotations
 

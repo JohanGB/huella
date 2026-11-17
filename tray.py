@@ -127,7 +127,7 @@ def watch_termination(app: QApplication) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Huella: profiler pasivo en la bandeja")
+    parser = argparse.ArgumentParser(description="Quietwatch: profiler pasivo en la bandeja")
     parser.add_argument("--data-dir", type=Path, default=None)
     parser.add_argument("--show", action="store_true", help="abre el panel al iniciar")
     args = parser.parse_args()
@@ -144,7 +144,7 @@ def main() -> int:
     lock = QLockFile(str(data_dir / "huella.lock"))
     lock.setStaleLockTime(0)
     if not lock.tryLock(0):
-        logging.warning("Ya hay una instancia de Huella en ejecución")
+        logging.warning("Ya hay una instancia de Quietwatch en ejecución")
         return 1
 
     tray = Tray(Config.load(data_dir), data_dir)

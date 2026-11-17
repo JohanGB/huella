@@ -122,7 +122,7 @@ class Dashboard(QWidget):
         self.daemon = daemon
         self.bridge = bridge
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
-        self.setWindowTitle("Huella")
+        self.setWindowTitle("Quietwatch")
         self.resize(980, 620)
 
         tabs = QTabWidget()
@@ -218,7 +218,7 @@ class Dashboard(QWidget):
         self.status.setText(
             f"CPU {snap.cpu_pct:.0f} %  |  RAM {snap.ram_pct:.0f} % "
             f"({fmt_mb(snap.ram_used_mb)} de {fmt_mb(snap.ram_total_mb)})  |  "
-            f"Swap {snap.swap_pct:.0f} %  |  Huella: tick {snap.tick_ms:.0f} ms, "
+            f"Swap {snap.swap_pct:.0f} %  |  Quietwatch: tick {snap.tick_ms:.0f} ms, "
             f"{self.daemon.self_cpu_pct:.2f} % CPU")
         visible = (p for p in snap.procs if p.core_pct or p.private_mb)
         top = sorted(visible, key=lambda p: (p.core_pct, p.private_mb),

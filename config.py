@@ -1,4 +1,4 @@
-"""Configuración de Huella. Sin dependencias: se importa desde todos los módulos."""
+"""Configuración de Quietwatch. Sin dependencias: se importa desde todos los módulos."""
 from __future__ import annotations
 
 import json
@@ -7,7 +7,8 @@ import sys
 from dataclasses import dataclass, fields, replace
 from pathlib import Path
 
-APP_NAME = "Huella"
+APP_NAME = "Quietwatch"  # nombre visible (ventana, bandeja, mensajes)
+DATA_DIR_NAME = "Huella"  # nombre histórico: define la carpeta de datos; no cambiarlo sin migrar
 DB_NAME = "huella.db"
 CONFIG_NAME = "huella.json"
 
@@ -16,9 +17,9 @@ def default_data_dir() -> Path:
     """Carpeta de datos del usuario. Nada se escribe fuera de ella."""
     if sys.platform == "win32":
         base = os.environ.get("LOCALAPPDATA") or str(Path.home() / "AppData" / "Local")
-        return Path(base) / APP_NAME
+        return Path(base) / DATA_DIR_NAME
     base = os.environ.get("XDG_DATA_HOME") or str(Path.home() / ".local" / "share")
-    return Path(base) / APP_NAME.lower()
+    return Path(base) / DATA_DIR_NAME.lower()
 
 
 @dataclass(frozen=True)
