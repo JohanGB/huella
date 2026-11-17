@@ -1,8 +1,8 @@
-# Huella
+# Quietwatch
 
 **Español** · [English](README.en.md) · [Ficha en el portafolio](https://johangb.github.io/proyectos/huella.html)
 
-![pruebas](https://github.com/JohanGB/huella/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
+![pruebas](https://github.com/JohanGB/quietwatch/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
 
 Profiler pasivo de solo lectura para Windows y Linux. Vive oculto en la bandeja del
 sistema, registra el consumo por aplicación y detecta fugas de memoria y procesos con CPU
@@ -19,15 +19,17 @@ solo se probaron con dobles de prueba, **no en un Windows real** (ver Limitacion
 pip install -r requirements.txt
 python tray.py                  # bandeja; doble clic abre el panel
 python daemon.py -v             # sin interfaz (Linux sin escritorio)
-python tools/bench.py           # mide lo que Huella le cuesta a TU equipo
+python tools/bench.py           # mide lo que Quietwatch le cuesta a TU equipo
 ```
 
 Para que inicie con Windows, crea en `shell:startup` un acceso directo a
-`pythonw.exe C:\ruta\tray.py`. Huella no lo hace por sí misma: tocar el arranque del
+`pythonw.exe C:\ruta\tray.py`. Quietwatch no lo hace por sí misma: tocar el arranque del
 sistema contradiría el principio de solo lectura.
 
 Para cambiar umbrales, como la N de los minutos de CPU, crea `huella.json` en la carpeta de
 datos (`%LOCALAPPDATA%\Huella` o `~/.local/share/huella`):
+
+La carpeta y los archivos de datos (`Huella`, `huella.db`, `huella.json`) conservan el nombre histórico del proyecto, "Huella", para no dejar huérfanos los datos ya registrados.
 
 ```json
 {"hot_minutes": 8, "hot_core_pct": 90, "leak_window_min": 45}
@@ -127,7 +129,7 @@ con apps × días. El mes sale de un `GROUP BY`, sin segunda tabla.
 **WAL + `synchronous = NORMAL`.** Sin `fsync` por commit, solo en el checkpoint. Un corte
 de energía puede perder el último lote, pero no corrompe la base.
 
-**Fecha de creación real.** En Linux `st_ctime` es el último cambio de metadatos. Huella
+**Fecha de creación real.** En Linux `st_ctime` es el último cambio de metadatos. Quietwatch
 llama a `statx(2)` por `ctypes` para leer el btime. Si el sistema de archivos no lo guarda,
 muestra `—` en lugar de inventar una fecha.
 
@@ -139,7 +141,7 @@ no saltárselas. Nunca abre un archivo.
 **Solo lectura comprobado, no prometido.** `tests/test_readonly.py` recorre el AST y falla
 si aparece `kill`, `terminate`, `suspend`, `nice`, `subprocess`, `socket` y similares. El
 panel lee por `mode=ro`, de modo que SQLite rechaza cualquier escritura. Por la misma regla
-Huella no baja su propia prioridad.
+Quietwatch no baja su propia prioridad.
 
 ## Resultados medidos
 
@@ -162,7 +164,7 @@ con 60 aplicaciones y cuenta los bytes pedidos al sistema:
 
 | Método | Pedido por día | Base tras 1 día |
 | --- | ---: | ---: |
-| Huella: agregados cada 5 min | 1.15 MB | 16 KB |
+| Quietwatch: agregados cada 5 min | 1.15 MB | 16 KB |
 | Una fila por proceso y tick (200 procesos) | 173.6 MB | 32.3 MB |
 
 Son 151 veces menos. La simulación da menos que el demonio real porque no incluye el
@@ -188,7 +190,7 @@ infinito se detectan, mientras que una caché y un proceso en reposo no.
   las uniones se validaron con objetos simulados. El cero del modo Gaming también debe
   confirmarse allí: una ventana Qt de bandeja puede recibir mensajes del sistema.
 - **Cero de CPU, no cero de RAM.** En modo Gaming el proceso sigue cargado en memoria. Salir
-  de Huella es la única forma de liberar esa RAM.
+  de Quietwatch es la única forma de liberar esa RAM.
 - **La bandeja pesa más que el demonio.** PyQt6 suma unos 28 MB al demonio. Abrir el panel
   suma cerca de 14 MB más, que no vuelven al sistema al cerrarlo. Medido con Qt `offscreen`,
   sin una bandeja real.
@@ -207,7 +209,7 @@ infinito se detectan, mientras que una caché y un proceso en reposo no.
 - **Doble clic en Linux.** Algunos escritorios no entregan ese evento a la bandeja. El menú
   contextual tiene "Abrir panel". Sin bandeja disponible, el panel se abre al iniciar.
 - **La base no está cifrada.** Guarda nombres de procesos y rutas de archivos, en local.
-  Huella no hace ninguna conexión de red.
+  Quietwatch no hace ninguna conexión de red.
 
 ## Pruebas
 

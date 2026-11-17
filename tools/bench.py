@@ -1,10 +1,10 @@
-"""Mide lo que Huella le cuesta a TU equipo. Funciona igual en Windows y Linux.
+"""Mide lo que Quietwatch le cuesta a TU equipo. Funciona igual en Windows y Linux.
 
     python tools/bench.py                 # todo, con la cadencia real
     python tools/bench.py --seconds 120   # ventanas de medición más largas
     python tools/bench.py --skip-qt       # sin la bandeja
 
-Lanza a Huella como proceso hijo y lo observa desde afuera con psutil, de modo
+Lanza a Quietwatch como proceso hijo y lo observa desde afuera con psutil, de modo
 que la medición no contamina al medido.
 """
 from __future__ import annotations

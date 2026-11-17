@@ -1,13 +1,13 @@
-# Huella
+# Quietwatch
 
 [Español](README.md) · **English** · [Portfolio page](https://johangb.github.io/en/projects/huella.html)
 
-![tests](https://github.com/JohanGB/huella/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![License](https://img.shields.io/badge/license-MIT-green)
+![tests](https://github.com/JohanGB/quietwatch/actions/workflows/pruebas.yml/badge.svg) ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![License](https://img.shields.io/badge/license-MIT-green)
 
 A passive, read-only profiler for Windows and Linux. It sits hidden in the system tray,
 records resource use per application and detects memory leaks and processes with
 sustained CPU. Its design principle: do not spend the resources it is trying to measure.
-*Huella* is Spanish for "footprint".
+Formerly *Quietwatch* (Spanish for "footprint"); the repository, its former URL and the portfolio page slug keep that name for continuity.
 
 **Status:** core, tray and dashboard are complete and tested on Linux. The Windows code
 paths were only tested with test doubles, **not on a real Windows machine** (see Limitations).
@@ -20,15 +20,17 @@ paths were only tested with test doubles, **not on a real Windows machine** (see
 pip install -r requirements.txt
 python tray.py                  # tray; double click opens the dashboard
 python daemon.py -v             # headless (Linux without a desktop)
-python tools/bench.py           # measures what Huella costs YOUR machine
+python tools/bench.py           # measures what Quietwatch costs YOUR machine
 ```
 
 To start it with Windows, create a shortcut to `pythonw.exe C:\path\tray.py` in
-`shell:startup`. Huella does not do this itself: touching system startup would break the
+`shell:startup`. Quietwatch does not do this itself: touching system startup would break the
 read-only principle.
 
 To change thresholds, such as the N minutes of CPU, create `huella.json` in the data folder
 (`%LOCALAPPDATA%\Huella` or `~/.local/share/huella`):
+
+The data folder and files (`Huella`, `huella.db`, `huella.json`) keep the project's historical name so existing recorded data is not orphaned.
 
 ```json
 {"hot_minutes": 8, "hot_core_pct": 90, "leak_window_min": 45}
@@ -119,7 +121,7 @@ Leak detection on 5,000 synthetic 30-minute series (`tools/calibrate.py`):
 - **No administrator rights.** Some protected processes return `AccessDenied`.
 - **Up to 5 minutes lost** on an abrupt shutdown.
 - **The database is not encrypted.** It stores process names and file paths, locally.
-  Huella makes no network connections.
+  Quietwatch makes no network connections.
 
 ## Tests
 

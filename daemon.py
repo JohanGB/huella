@@ -1,4 +1,4 @@
-"""Demonio de Huella: hilos, ciclo de vida y modo Gaming.
+"""Demonio de Quietwatch: hilos, ciclo de vida y modo Gaming.
 
 Arquitectura: un solo reloj y una tubería.
 
@@ -335,7 +335,7 @@ class TelemetryDaemon:
 
 def main() -> int:
     """Modo sin interfaz, útil en Linux sin escritorio. En escritorio usa tray.py."""
-    parser = argparse.ArgumentParser(description="Huella sin interfaz")
+    parser = argparse.ArgumentParser(description="Quietwatch sin interfaz")
     parser.add_argument("--data-dir", type=Path, default=None)
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
